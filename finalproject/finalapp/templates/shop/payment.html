@@ -1,0 +1,41 @@
+<!-- templates/shop/payment.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <form action="{% url 'verify_payment' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="razorpay_order_id" value="{{ razorpay_order_id }}">
+        <input type="hidden" name="total_amount" value="{{ total_amount }}">
+        <input type="hidden" name="order_id" value="{{ order.id }}">
+        <button id="rzp-button1">Pay Now</button>
+    </form>
+    <script>
+        var options = {
+            "key": "{{ razorpay_key_id }}",
+            "amount": "{{ total_amount }}00", // Amount is in currency subunits. Default currency is INR.
+            "currency": "INR",
+            "name": "ShopKart",
+            "description": "Test Transaction",
+            "order_id": "{{ razorpay_order_id }}", // Pass the order_id created in the backend.
+            "handler": function (response){
+                document.querySelector('input[name="razorpay_payment_id"]').value = response.razorpay_payment_id;
+                document.querySelector('form').submit();
+            },
+            
+           
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
