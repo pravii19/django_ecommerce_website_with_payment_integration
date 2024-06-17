@@ -136,8 +136,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
-RAZORPAY_KEY_ID = 'rzp_test_NsAeTw5PGWQoaq'
-RAZORPAY_KEY_SECRET = 'IcxJCM3zvuNUn0UVIRGrB'
+RAZORPAY_KEY_ID = ''
+RAZORPAY_KEY_SECRET = ''
 RAZORPAY_MODE = 'test'
 # settings.py
 
